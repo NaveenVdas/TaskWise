@@ -13,4 +13,22 @@ public sealed class OperationResult<T>
         Status = OperationStatus.Success,
         Payload = payload
     };
+
+    public static OperationResult<T> NotFound(string message) => new()
+    {
+        Status = OperationStatus.NotFound,
+        ErrorMessages = [message]
+    };
+
+    public static OperationResult<T> UserNotActive(string message) => new()
+    {
+        Status = OperationStatus.UserNotActive,
+        ErrorMessages = [message]
+    };
+
+    public static OperationResult<T> Unauthorized(string message) => new()
+    {
+        Status = OperationStatus.Unauthorized,
+        ErrorMessages = [message]
+    };
 }

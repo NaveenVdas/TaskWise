@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using Microsoft.EntityFrameworkCore;
-using TaskWise.Application.QueryServices.IRoleQueryServices;
 using TaskWise.Application.QueryServices.Role;
 
 namespace TaskWise.Infrastructure.QueryServices;

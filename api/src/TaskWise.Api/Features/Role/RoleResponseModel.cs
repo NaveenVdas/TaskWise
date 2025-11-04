@@ -1,4 +1,4 @@
-﻿using TaskWise.Application.QueryServices.IRoleQueryServices;
+﻿using TaskWise.Application.QueryServices.Role;
 using RoleId = TaskWise.Domain.DomainModels.Enums.Role;
 
 namespace TaskWise.Api.Features.Role;

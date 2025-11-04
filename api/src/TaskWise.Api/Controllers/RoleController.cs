@@ -1,8 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskWise.Api.Features.Role;
 using TaskWise.Application.BusinessServices.Role;
-using TaskWise.Application.QueryServices.IRoleQueryServices;
+using TaskWise.Application.QueryServices.Role;
 
 namespace TaskWise.Api.Controllers;
 
@@ -18,6 +19,7 @@ public class RoleController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Policy = "RequireAdminRole")]
     public async Task<IActionResult> GetAll(CancellationToken ct)
     {
         ReadOnlyCollection<RoleInfo> roles = await _roleService.GetAll(ct);

@@ -6,9 +6,12 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Host.ConfigureApplicationLogging();
 builder.Services
     .AddApiServices()
-    .RegisterTaskWiseServices(builder.Configuration);
-builder.Services.AddSwaggerGen();
-
+    .AddSwaggerConfiguration()
+    .RegisterTaskWiseServices(builder.Configuration)
+    .AddValidationServices()
+    .AddJwtAuthentication(builder.Configuration)
+    .AddAuthorizationPolicies()
+    .AddApiDependencies();
 WebApplication app = builder.Build();
 app.ConfigurePipeline();
 app.Run();

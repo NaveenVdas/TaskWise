@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskWise.Infrastructure;
 
@@ -11,9 +12,11 @@ using TaskWise.Infrastructure;
 namespace TaskWise.Infrastructure.Migrations
 {
     [DbContext(typeof(TaskWiseDbContext))]
-    partial class TaskWiseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251104113842_LoginSetup")]
+    partial class LoginSetup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
