@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using Serilog.Context;
+using TaskWise.Api.Middleware;
 
 namespace TaskWise.Api.Common.Extensions;
 
@@ -14,6 +15,7 @@ public static class WebApplicationExtensions
                 await next(context);
             }
         });
+        app.UseGlobalExceptionHandler();
 
         if (app.Environment.IsDevelopment())
         {
