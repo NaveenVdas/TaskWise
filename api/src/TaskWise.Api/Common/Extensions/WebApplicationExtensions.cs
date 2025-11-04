@@ -8,6 +8,9 @@ public static class WebApplicationExtensions
 {
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
+        app.UseGlobalExceptionHandler();
+        app.UseHttpsRedirection();
+
         app.Use(async (context, next) =>
         {
             using (LogContext.PushProperty("CorrelationId", context.TraceIdentifier))
@@ -15,7 +18,7 @@ public static class WebApplicationExtensions
                 await next(context);
             }
         });
-        app.UseGlobalExceptionHandler();
+        app.UseSerilogRequestLogging();
 
         if (app.Environment.IsDevelopment())
         {
@@ -23,8 +26,7 @@ public static class WebApplicationExtensions
             app.UseSwaggerUI();
         }
 
-        app.UseHttpsRedirection();
-        app.UseSerilogRequestLogging();
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllers();

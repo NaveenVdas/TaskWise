@@ -1,6 +1,6 @@
 ﻿using RoleId = TaskWise.Domain.DomainModels.Enums.Role;
 
-namespace TaskWise.Application.QueryServices.IRoleQueryServices;
+namespace TaskWise.Application.QueryServices.Role;
 
 public sealed class RoleInfo
 {

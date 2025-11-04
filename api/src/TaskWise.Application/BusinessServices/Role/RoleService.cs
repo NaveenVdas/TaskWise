@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using TaskWise.Application.QueryServices.IRoleQueryServices;
 using TaskWise.Application.QueryServices.Role;
 
 namespace TaskWise.Application.BusinessServices.Role;
