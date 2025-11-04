@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>12</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <NoWarn>CS1591</NoWarn>
+    <TreatWarningAsErrors>True</TreatWarningAsErrors>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <EnforceCodeInStyle>True</EnforceCodeInStyle>
+  </PropertyGroup>
+</Project>
