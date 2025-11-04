@@ -8,5 +8,8 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskWise.Infrastructure\TaskWise.Infrastructure.csproj" />
+  </ItemGroup>
 
 </Project>
