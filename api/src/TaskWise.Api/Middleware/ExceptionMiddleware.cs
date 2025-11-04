@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using Serilog;
 
 namespace TaskWise.Api.Middleware;
 
@@ -8,11 +7,13 @@ public sealed class ExceptionMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly IWebHostEnvironment _environment;
+    private readonly ILogger<ExceptionMiddleware> _logger;
 
-    public ExceptionMiddleware(RequestDelegate next, IWebHostEnvironment environment)
+    public ExceptionMiddleware(RequestDelegate next, IWebHostEnvironment environment, ILogger<ExceptionMiddleware> logger)
     {
         _next = next;
         _environment = environment;
+        _logger = logger;
     }
 
     public async Task Invoke(HttpContext context)
@@ -23,7 +24,7 @@ public sealed class ExceptionMiddleware
         }
         catch (Exception ex)
         {
-            Log.Error(ex, "Unexpected error occurred. {Method} {Path} CorrelationId:{CorrelationId}",
+            _logger.LogError(ex, "Unexpected error occurred. {Method} {Path} CorrelationId:{CorrelationId}",
                 context.Request.Method, context.Request.Path, context.TraceIdentifier);
 
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
