@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskWise.Api.Common.Adapters;
+using TaskWise.Api.Features.Auth.InviteUser;
 using TaskWise.Api.Features.Auth.Login;
 using TaskWise.Application.BusinessServices.Auth;
 using TaskWise.Application.Common.OperationHandler;
@@ -29,5 +30,15 @@ public class AuthController : ControllerBase
         return result.IsSuccess && result.Payload is not null
              ? Ok(new LoginResponseModel(result.Payload))
              : _resultAdapter.ToActionResult(result);
+    }
+
+    [HttpPost("invite-user")]
+    [Authorize(Policy = "RequireAdminRole")]
+    public async Task<IActionResult> InviteUser(InviteRequestModel model, CancellationToken ct)
+    {
+        OperationResult<bool> result = await _authService.InviteUser(model.ToCommand(), ct);
+        return result.IsSuccess
+            ? Created()
+            : _resultAdapter.ToActionResult(result);
     }
 }

@@ -39,4 +39,26 @@ public sealed class TokenService : ITokenService
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
+
+    public string GenerateInviteToken(string email, Role role, int expirationHours)
+    {
+        Claim[] claims = new[]
+        {
+            new Claim(JwtRegisteredClaimNames.Email, email),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()),
+            new Claim(ClaimTypes.Role, role.ToString())
+        };
+
+        var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256);
+
+        var token = new JwtSecurityToken(
+            issuer: _tokenSettings.Issuer,
+            audience: _tokenSettings.Audience,
+            claims: claims,
+            expires: DateTime.UtcNow.AddHours(expirationHours),
+            signingCredentials: credentials);
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
 }

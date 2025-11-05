@@ -13,6 +13,7 @@ public sealed class ResultAdapter : IResultAdapter
             OperationStatus.NotFound => new NotFoundObjectResult(result),
             OperationStatus.UserNotActive => new UnauthorizedObjectResult(result),
             OperationStatus.Unauthorized => new UnauthorizedObjectResult(result),
+            OperationStatus.ValidationError => new BadRequestObjectResult(result),
             _ => throw new ArgumentOutOfRangeException(nameof(result.Status))
         };
     }

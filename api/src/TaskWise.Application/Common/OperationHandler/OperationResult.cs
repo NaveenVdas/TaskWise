@@ -31,4 +31,10 @@ public sealed class OperationResult<T>
         Status = OperationStatus.Unauthorized,
         ErrorMessages = [message]
     };
+
+    public static OperationResult<T> ValidationError(string message) => new()
+    {
+        Status = OperationStatus.ValidationError,
+        ErrorMessages = [message]
+    };
 }
